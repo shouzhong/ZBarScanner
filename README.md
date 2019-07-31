@@ -5,9 +5,9 @@
 
 <table>
     <tr>
-        <td><img width="270" height="480" src="https://github.com/shouzhong/ScreenHelper/blob/master/Screenshots/1.jpg"/></td>
-        <td><img width="270" height="480" src="https://github.com/shouzhong/ScreenHelper/blob/master/Screenshots/2.jpg"/></td>
-        <td><img width="270" height="480" src="https://github.com/shouzhong/ScreenHelper/blob/master/Screenshots/3.jpg"/></td>
+        <td><img width="270" height="480" src="https://github.com/shouzhong/ZBarScanner/blob/master/Screenshots/1.jpg"/></td>
+        <td><img width="270" height="480" src="https://github.com/shouzhong/ZBarScanner/blob/master/Screenshots/2.jpg"/></td>
+        <td><img width="270" height="480" src="https://github.com/shouzhong/ZBarScanner/blob/master/Screenshots/3.jpg"/></td>
     </tr>
 </table>
 

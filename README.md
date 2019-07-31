@@ -197,6 +197,7 @@ class ViewFinder extends View implements IViewFinder {
 ## 方法说明
 
 ZBarScannerView
+
 方法名 | 说明
 ------------ | -------------
 setViewFinder | 扫描区域
@@ -211,6 +212,7 @@ isFlashOn | 闪光灯是否被点亮
 setShouldAdjustFocusArea | 设置是否要根据扫码框的位置去调整对焦区域的位置，部分手机不支持
 
 DecodeUtils
+
 方法名 | 说明
 ------------ | -------------
 decode | 识别图片，建议在子线程运行

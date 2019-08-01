@@ -114,20 +114,20 @@ public class ZBarScannerView extends FrameLayout implements Camera.PreviewCallba
             }
             // 识别成功
             SymbolSet syms = imageScanner.getResults();
-            String s = null;
             for (Symbol sym : syms) {
-                s = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT ? new String(sym.getDataBytes(), StandardCharsets.UTF_8) : sym.getData();
-                if (!TextUtils.isEmpty(s)) {
-                    break;//识别成功一个就跳出循环
+                final String s = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT ? new String(sym.getDataBytes(), StandardCharsets.UTF_8) : sym.getData();
+                if (s != null) {
+                    post(new Runnable() {//切换到主线程
+                        @Override
+                        public void run() {
+                            if (callback != null) callback.result(s);
+                        }
+                    });
+                    return;
                 }
             }
-            final String str = s;
-            post(new Runnable() {//切换到主线程
-                @Override
-                public void run() {
-                    if (callback != null) callback.result(str);
-                }
-            });
+            //再获取一帧图像数据进行识别（会再次触发onPreviewFrame方法）
+            getOneMoreFrame();
         } catch (RuntimeException e) {
             e.printStackTrace();
         }

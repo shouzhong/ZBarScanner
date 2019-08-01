@@ -81,6 +81,7 @@ public class ZBarScannerView extends FrameLayout implements Camera.PreviewCallba
             int previewHeight = parameters.getPreviewSize().height;
             //根据ViewFinderView和preview的尺寸之比，缩放扫码区域
             Rect rect = getScaledRect(previewWidth, previewHeight);
+
             /*
              * 方案一：旋转图像数据
              */
@@ -98,7 +99,6 @@ public class ZBarScannerView extends FrameLayout implements Camera.PreviewCallba
              * 方案二：旋转截取区域
              */
             rect = getRotatedRect(previewWidth, previewHeight, rect);
-
             //从preView的图像中截取扫码区域
             Image barcode = new Image(previewWidth, previewHeight, "Y800");
             barcode.setData(data);
@@ -120,6 +120,11 @@ public class ZBarScannerView extends FrameLayout implements Camera.PreviewCallba
                 if (!TextUtils.isEmpty(s)) {
                     break;//识别成功一个就跳出循环
                 }
+            }
+            if (TextUtils.isEmpty(s)) {
+                //再获取一帧图像数据进行识别（会再次触发onPreviewFrame方法）
+                getOneMoreFrame();
+                return;
             }
             final String str = s;
             post(new Runnable() {//切换到主线程
@@ -302,7 +307,9 @@ public class ZBarScannerView extends FrameLayout implements Camera.PreviewCallba
      */
     private void getOneMoreFrame() {
         if (cameraWrapper != null) {
-            cameraWrapper.camera.setOneShotPreviewCallback(this);
+            try {
+                cameraWrapper.camera.setOneShotPreviewCallback(this);
+            } catch (Exception e) {}
         }
     }
 

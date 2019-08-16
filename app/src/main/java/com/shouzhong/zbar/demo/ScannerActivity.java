@@ -27,9 +27,10 @@ public class ScannerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scanner);
         zBarScannerView = findViewById(R.id.zbar);
         zBarScannerView.setViewFinder(new ViewFinder(this));
+        zBarScannerView.setSaveBmp(true);
         zBarScannerView.setCallback(new Callback() {
             @Override
-            public void result(String s) {
+            public void result(String s, String path) {
                 Log.e("==================", s);
                 startVibrator();
                 zBarScannerView.restartPreviewAfterDelay(2000);

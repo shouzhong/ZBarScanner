@@ -32,7 +32,7 @@ public class ScannerBottomActivity extends AppCompatActivity {
         zBarScannerView.setViewFinder(new ViewFinder(this));
         zBarScannerView.setCallback(new Callback() {
             @Override
-            public void result(String s) {
+            public void result(String s, String path) {
                 Log.e("==================", s);
                 tv.setText(s);
                 startVibrator();
